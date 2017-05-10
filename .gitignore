@@ -1,1 +1,3 @@
-
+.idea/
+web_server/server/node_modules/
+news_topic_modeling_service/model/eval_score/

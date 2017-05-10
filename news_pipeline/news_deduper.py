@@ -33,7 +33,8 @@ def handle_message(msg):
     if msg is None or not isinstance(msg, dict) :
         return
     task = msg
-    text = str(task['text'])
+#     text = str(task['text'])
+    text = task['text'].encode('utf-8')
     if text is None:
         return
 
@@ -66,6 +67,10 @@ def handle_message(msg):
 
     # Classify news
     title = task['title']
+    description = task['description']
+    print "========== description start ========="
+    print task['description']
+    print "========== description end ========="
     if title is not None:
         topic = news_topic_modeling_service_client.classify(description)
         task['class'] = topic

@@ -34,12 +34,18 @@ def handle_message(msg):
 
     task = msg
     text = None
+    print task['url']
 
     article = Article(task['url'])
     article.download()
     article.parse()
 
     print article.text
+#     if task['source'] == 'cnn':
+#         print 'Scraping news from cnn'
+#         text = cnn_news_scraper.extract_news(task['url'])
+#     else:
+#         print 'News source [%s] is not supported.' % task['source']
 
     task['text'] = article.text
     dedupe_news_queue_client.sendMessage(task)

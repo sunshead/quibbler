@@ -11,7 +11,7 @@ import mongodb_client
 PREFERENCE_MODEL_TABLE_NAME = "user_preference_model"
 
 SERVER_HOST = 'localhost'
-SERVER_PORT = 5050
+SERVER_PORT = 5050 #5050
 
 # Ref: https://www.python.org/dev/peps/pep-0485/#proposed-implementation
 # Ref: http://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python

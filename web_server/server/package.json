@@ -21,5 +21,8 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.2",
     "validator": "^7.0.0"
+  },
+  "devDependencies": {
+    "react-rt-chart": "^1.3.0"
   }
 }
