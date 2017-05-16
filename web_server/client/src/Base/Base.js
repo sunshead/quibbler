@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import logo from '../../public/logo.png';
 import Auth from '../Auth/Auth';
+import './Base.css';
 
 const Base = ({ children }) => (
     <div>
-        <nav className="nav-bar indigo lighten-1">
+        <nav className="nav-bar blue-grey lighten-1">
             <div className="nav-wrapper">
-                <a href="/" className="brand-logo">&nbsp;&nbsp;Tap News</a>
+                <a href="/" className="navbar-left"><img className="navbar-logo" src={logo} alt="logo" /></a>
                 <ul id="nav-mobile" className="right">
                     {Auth.isUserAuthenticated() ?
                         (<div>

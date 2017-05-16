@@ -2,13 +2,21 @@ import './NewsPanel.css';
 import _ from 'lodash';
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
+import NewsFilter from '../NewsFilter/NewsFilter';
 import Auth from '../Auth/Auth';
 
 class NewsPanel extends React.Component {
     constructor() {
         super();
-        this.state = {news: null, pageNum: 1, totalPages: 1, loadedAll: false};
+        this.state = {
+            news: null,
+            pageNum: 1,
+            totalPages: 1,
+            loadedAll: false,
+            filterCategories: []
+        };
         this.handleScroll = this.handleScroll.bind(this);
+        this.handleFilterCategoriesSelection = this.handleFilterCategoriesSelection.bind(this);
     }
 
     componentDidMount() {
@@ -54,21 +62,34 @@ class NewsPanel extends React.Component {
             });
     }
 
+    handleFilterCategoriesSelection(filterCategories) {
+        this.setState({
+            filterCategories: filterCategories
+        });
+    }
+
     renderNews() {
-        var news_list = this.state.news.map(function (news) {
-            return (
-                <a className="list-group-item" href="#">
-                    <NewsCard news={news}/>
-                </a>
-            );
+        let categories = this.state.filterCategories;
+        let news_list = this.state.news.map(function (news) {
+            if (categories.includes(news.class)) {
+                return (
+                    <a href="#">
+                        <NewsCard news={news}/>
+                    </a>
+                );
+            }
         });
 
         return (
-            <div className="container-fluid">
-                <div className="list-group">
-                    {news_list}
+                <div className="row">
+                    <NewsFilter
+                        filterCategories={this.state.filterCategories}
+                        onFilterCategoriesSelection={this.handleFilterCategoriesSelection}
+                    />
+                    <div className="col s12 m9">
+                        {news_list}
+                    </div>
                 </div>
-            </div>
         );
     }
 
