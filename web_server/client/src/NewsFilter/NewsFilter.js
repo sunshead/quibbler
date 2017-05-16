@@ -2,26 +2,6 @@ import React from 'react';
 import './NewsFilter.css';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
-const categories = [
-    'Colleges & Schools',
-    'Environmental',
-    'World',
-    'Entertainment',
-    'Media',
-    'Politics & Government',
-    'Regional News',
-    'Religion',
-    'Sports',
-    'Technology',
-    'Traffic',
-    'Weather',
-    'Economic & Corp',
-    'Advertisements',
-    'Crime',
-    'Other',
-    'Magazine'
-]
-
 class NewsFilter extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +13,7 @@ class NewsFilter extends React.Component {
     }
 
     render() {
-        let checkbox = categories.map((category) =>
+        let checkbox = this.props.categories.map((category) =>
             <div>
                 <label><Checkbox className="filter-checkbox" value={category}/> {category}</label>
             </div>
