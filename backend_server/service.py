@@ -21,6 +21,11 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
     def logNewsClickForUser(self, user_id, news_id):
         return operations.logNewsClickForUser(user_id, news_id)
 
+    """ Update news status """
+    @pyjsonrpc.rpcmethod
+    def updateNewsStatus(self, news_id):
+        return operations.updateNewsStatus(news_id)
+
 # Threading HTTP Server
 http_server = pyjsonrpc.ThreadingHttpServer(
     server_address = (SERVER_HOST, SERVER_PORT),

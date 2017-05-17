@@ -4,6 +4,7 @@ import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import NewsFilter from '../NewsFilter/NewsFilter';
 import Auth from '../Auth/Auth';
+import Search from '../Search/Search';
 
 const defaultCategories = [
     'Colleges & Schools',
@@ -33,10 +34,12 @@ class NewsPanel extends React.Component {
             pageNum: 1,
             totalPages: 1,
             loadedAll: false,
-            filterCategories: defaultCategories
+            filterCategories: defaultCategories,
+            searchText: null
         };
         this.handleScroll = this.handleScroll.bind(this);
         this.handleFilterCategoriesSelection = this.handleFilterCategoriesSelection.bind(this);
+        this.handleSearchTextInput = this.handleSearchTextInput.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +54,13 @@ class NewsPanel extends React.Component {
             console.log('Loading more news');
             this.loadMoreNews();
         }
+    }
+
+    handleSearchTextInput(searchText) {
+        this.setState({
+            searchText: searchText
+        });
+        console.log(this.state.searchText);
     }
 
     loadMoreNews() {
@@ -89,9 +99,15 @@ class NewsPanel extends React.Component {
     }
 
     renderNews() {
+        console.log(this.state.searchText);
         let categories = this.state.filterCategories;
         let news_list = this.state.news.map(function (news) {
-            if (categories.includes(news.class)) {
+            // if (news.title.indexOf(this.state.searchText) === -1) {
+            //     return;
+            // }
+            //&& (news.title.indexOf(this.state.searchText) !== -
+            console.log(news.title);
+            if (categories.includes(news.class) && (news.title.indexOf(this.state.searchText) != -1)) {
                 return (
                     <a href="#">
                         <NewsCard news={news}/>
@@ -102,6 +118,7 @@ class NewsPanel extends React.Component {
 
         return (
                 <div className="row">
+                    <Search searchText={this.state.searchText} onSearchTextInput={this.handleSearchTextInput}/>
                     <NewsFilter
                         categories={defaultCategories}
                         filterCategories={this.state.filterCategories}

@@ -23,4 +23,13 @@ router.post('/userId/:userId/newsId/:newsId', function(req, res, next) {
     res.status(200);
 });
 
+/* PUT news status. */
+router.put('/newsId/:newsId', function(req, res, next) {
+    console.log('Updating news status...');
+    news_id = req.params['newsId'];
+
+    rpc_client.updateNewsStatus(news_id);
+    res.status(200);
+});
+
 module.exports = router;

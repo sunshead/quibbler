@@ -22,6 +22,24 @@ class NewsCard extends React.Component{
         fetch(request);
     }
 
+    toggleSave(news) {
+        let url = 'http://localhost:3000/news/newsId/' + news.digest;
+        console.log(url)
+
+        let request = new Request(encodeURI(url), {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'bearer ' + Auth.getToken(),
+            },
+            cache: false});
+
+        fetch(request).then(function(response) {
+            if(response.ok) {
+                console.log(news.saved);
+            }
+        });
+    }
+
     render() {
         return(
                 <div className="col s12 m12">
@@ -35,7 +53,14 @@ class NewsCard extends React.Component{
                                 <p>{this.props.news.description}</p>
                             </div>
                             <div className="card-action">
-                                <a href="#" className="blue-grey-text"> Save news </a>
+                                {!this.props.news.saved &&
+                                <a href="#" className="blue-grey-text" onClick={() => this.toggleSave(this.props.news)}>
+                                    Save news
+                                </a>}
+                                {this.props.news.saved &&
+                                <a href="#" className="blue-grey-text" onClick={() => this.toggleSave(this.props.news)}>
+                                    Unsave news
+                                </a>}
                                 {this.props.news.class != null &&
                                 <div className='chip'>
                                     <i>{this.props.news.class}</i>

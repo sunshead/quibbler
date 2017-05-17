@@ -103,3 +103,12 @@ def logNewsClickForUser(user_id, news_id):
     # Send log task to machine learning service for prediction
     message = {'userId': user_id, 'newsId': news_id, 'timestamp': str(datetime.utcnow())}
     cloudAMQP_client.sendMessage(message);
+
+def updateNewsStatus(news_id):
+    db = mongodb_client.get_db()
+    target_news = db[NEWS_TABLE_NAME].find_one({'digest':news_id})
+    if target_news['saved'] == True:
+        target_news['saved'] = False
+    else:
+        target_news['saved'] = True
+    return json.loads(dumps(target_news))

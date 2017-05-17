@@ -13,6 +13,7 @@ from cloudAMQP_client import CloudAMQPClient
 LOG_CLICKS_TASK_QUEUE_URL = "amqp://smwfmrls:GLVjxm1vODODri-M_f3B7xXzVJYHjCr_@crocodile.rmq.cloudamqp.com/smwfmrls"
 LOG_CLICKS_TASK_QUEUE_NAME = "tap-news-log-clicks-task-queue"
 
+NEWS_TABLE_NAME = "news"
 CLICK_LOGS_TABLE_NAME = 'click_logs'
 
 cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QUEUE_NAME)
@@ -21,7 +22,6 @@ cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QU
 
 def test_getNewsSummariesForUser_basic():
     news = operations.getNewsSummariesForUser('test', 1)
-    print news
     assert len(news) > 0
     print 'test_getNewsSummariesForUser_basic passed!'
 
@@ -65,8 +65,17 @@ def test_logNewsClickForUser_basic():
 
     print 'test_logNewsClicksForUser_basic passed!'
 
+def test_updateNewsStatus_basic():
+    test_news = {'digest' : '123', 'saved' : False}
+    db = mongodb_client.get_db()
+    db[NEWS_TABLE_NAME].insert(test_news)
+    news = operations.updateNewsStatus('123')
+    assert news['saved'] == True
+    print 'test_updateNewsStatus_basic passed!'
+
 
 if __name__ == "__main__":
     test_getNewsSummariesForUser_basic()
     test_getNewsSummariesForUser_pagination()
 #     test_logNewsClickForUser_basic()
+    test_updateNewsStatus_basic()

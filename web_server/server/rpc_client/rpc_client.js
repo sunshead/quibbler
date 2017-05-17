@@ -32,8 +32,17 @@ function logNewsClickForUser(user_id, news_id) {
     });
 }
 
+// Log a news click event for a user
+function updateNewsStatus(news_id) {
+    client.request('updateNewsStatus', [news_id], function(err, error, response) {
+        if (err) throw err;
+        console.log(response);
+    });
+}
+
 module.exports = {
     add : add,
     getNewsSummariesForUser : getNewsSummariesForUser,
-    logNewsClickForUser : logNewsClickForUser
+    logNewsClickForUser : logNewsClickForUser,
+    updateNewsStatus : updateNewsStatus
 }
