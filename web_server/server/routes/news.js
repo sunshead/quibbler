@@ -24,7 +24,7 @@ router.post('/userId/:userId/newsId/:newsId', function(req, res, next) {
 });
 
 /* PUT news status. */
-router.put('/newsId/:newsId', function(req, res, next) {
+router.get('/userId/:userId/newsId/:newsId', function(req, res, next) {
     console.log('Updating news status...');
     news_id = req.params['newsId'];
 

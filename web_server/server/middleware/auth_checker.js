@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
 
     console.log('auth_checker: token: ' + token);
+    // console.log(req.params);
 
     // decode the token using a secret key-phrase
     return jwt.verify(token, config.jwtSecret, (err, decoded) => {

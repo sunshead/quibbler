@@ -3,6 +3,17 @@ import Auth from '../Auth/Auth';
 import React from 'react';
 
 class NewsCard extends React.Component{
+    constructor() {
+        super();
+        this.state = { saved: null }
+    }
+
+    ComponentDidMount() {
+        this.setState({
+            saved: this.props.news.saved
+        })
+    }
+
     redirectToUrl(url) {
         this.sendClickLog();
         window.open(url, '_blank');
@@ -23,11 +34,12 @@ class NewsCard extends React.Component{
     }
 
     toggleSave(news) {
-        let url = 'http://localhost:3000/news/newsId/' + news.digest;
+        let url = 'http://localhost:3000/news/userId/' + Auth.getEmail()
+            + '/newsId/' + news.digest;
         console.log(url)
 
         let request = new Request(encodeURI(url), {
-            method: 'PUT',
+            method: 'GET',
             headers: {
                 'Authorization': 'bearer ' + Auth.getToken(),
             },
@@ -38,6 +50,10 @@ class NewsCard extends React.Component{
                 console.log(news.saved);
             }
         });
+
+        this.setState({
+            saved: !this.state.saved
+        })
     }
 
     render() {
@@ -53,14 +69,9 @@ class NewsCard extends React.Component{
                                 <p>{this.props.news.description}</p>
                             </div>
                             <div className="card-action">
-                                {!this.props.news.saved &&
                                 <a href="#" className="blue-grey-text" onClick={() => this.toggleSave(this.props.news)}>
-                                    Save news
-                                </a>}
-                                {this.props.news.saved &&
-                                <a href="#" className="blue-grey-text" onClick={() => this.toggleSave(this.props.news)}>
-                                    Unsave news
-                                </a>}
+                                    {this.state.saved ? 'Unsave News' : 'Save News'}
+                                </a>
                                 {this.props.news.class != null &&
                                 <div className='chip'>
                                     <i>{this.props.news.class}</i>
