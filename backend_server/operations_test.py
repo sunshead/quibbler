@@ -3,18 +3,22 @@ import os
 import sys
 
 from sets import Set
+from cloudAMQP_client import CloudAMQPClient
 
 # import common package in parent directory
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client
-from cloudAMQP_client import CloudAMQPClient
+import yaml
 
-LOG_CLICKS_TASK_QUEUE_URL = "amqp://smwfmrls:GLVjxm1vODODri-M_f3B7xXzVJYHjCr_@crocodile.rmq.cloudamqp.com/smwfmrls"
-LOG_CLICKS_TASK_QUEUE_NAME = "tap-news-log-clicks-task-queue"
+with open("../config.yaml", "r") as ymlfile:
+    config = yaml.load(ymlfile)
 
-NEWS_TABLE_NAME = "news"
-CLICK_LOGS_TABLE_NAME = 'click_logs'
+LOG_CLICKS_TASK_QUEUE_URL = config['amqp']['log_clicks_task_queue_url']
+LOG_CLICKS_TASK_QUEUE_NAME = config['amqp']['log_clicks_task_queue_name']
+
+NEWS_TABLE_NAME = config['mongodb']['news_table_name']
+CLICK_LOGS_TABLE_NAME = config['mongodb']['click_logs_table_name']
 
 cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QUEUE_NAME)
 

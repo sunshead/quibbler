@@ -13,39 +13,25 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client
 import news_recommendation_service_client
+import yaml
 
 from cloudAMQP_client import CloudAMQPClient
 
-# import yaml
-#
-# with open("../config.yaml", "r") as ymlfile:
-#     config = yaml.load(ymlfile)
-#
-# REDIS_HOST = config.redis.host
-# REDIS_PORT = config.redis.port
-#
-# NEWS_TABLE_NAME = config.mongodb.news_table_name
-# CLICK_LOGS_TABLE_NAME = config.mongodb.click_logs_table_name
-#
-# NEWS_LIMIT = config.mongodb.news_limit
-# NEWS_LIST_BATCH_SIZE = config.mongodb.news_list_batch_size
-# USER_NEWS_TIME_OUT_IN_SECONDS = config.mongodb.user_news_time_out_in_seconds
-#
-# LOG_CLICKS_TASK_QUEUE_URL = config.amqp.log_clicks_task_queue_url
-# LOG_CLICKS_TASK_QUEUE_NAME = config.amqp.log_clicks_task_queue_name
+with open("../config.yaml", "r") as ymlfile:
+    config = yaml.load(ymlfile)
 
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
+REDIS_HOST = config['redis']['host']
+REDIS_PORT = config['redis']['port']
 
-NEWS_TABLE_NAME = "news"
-CLICK_LOGS_TABLE_NAME = 'click_logs'
+NEWS_TABLE_NAME = config['mongodb']['news_table_name']
+CLICK_LOGS_TABLE_NAME = config['mongodb']['click_logs_table_name']
 
-NEWS_LIMIT = 100
-NEWS_LIST_BATCH_SIZE = 10
-USER_NEWS_TIME_OUT_IN_SECONDS = 60
+NEWS_LIMIT = config['mongodb']['news_limit']
+NEWS_LIST_BATCH_SIZE = config['mongodb']['news_list_batch_size']
+USER_NEWS_TIME_OUT_IN_SECONDS = config['mongodb']['user_news_timeout_in_seconds']
 
-LOG_CLICKS_TASK_QUEUE_URL = "amqp://smwfmrls:GLVjxm1vODODri-M_f3B7xXzVJYHjCr_@crocodile.rmq.cloudamqp.com/smwfmrls"
-LOG_CLICKS_TASK_QUEUE_NAME = "tap-news-log-clicks-task-queue"
+LOG_CLICKS_TASK_QUEUE_URL = config['amqp']['log_clicks_task_queue_url']
+LOG_CLICKS_TASK_QUEUE_NAME = config['amqp']['log_clicks_task_queue_name']
 
 redis_client = redis.StrictRedis(REDIS_HOST, REDIS_PORT, db=0)
 cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QUEUE_NAME)

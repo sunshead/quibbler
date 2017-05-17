@@ -11,7 +11,7 @@ mongodb:
     click_logs_table_name: "click_logs"
     preference_model_table_name: "user_preference_model"
     news_limit: 100
-    news_list_batch_size: 10
+    news_list_batch_size: 20
     user_news_timeout_in_seconds: 60
 
 amqp:
