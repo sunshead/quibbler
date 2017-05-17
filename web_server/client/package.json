@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.4",
+    "material-design-icons": "^3.0.1",
     "materialize-css": "^0.98.1",
     "react": "^15.4.2",
     "react-checkbox-group": "^3.1.1",

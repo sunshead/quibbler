@@ -24,6 +24,17 @@ const Base = ({ children }) => (
                 </ul>
             </div>
         </nav>
+        <nav className="blue-grey lighten-4">
+            <div className="nav-wrapper">
+                <form>
+                    <div className="input-field">
+                        <input id="search" type="search"/>
+                        <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                    </div>
+                </form>
+            </div>
+        </nav>
         <br/>
         {children}
     </div>

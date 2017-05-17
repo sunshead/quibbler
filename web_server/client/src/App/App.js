@@ -10,6 +10,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                rel="stylesheet"/>
         <div className="container">
           <NewsPanel/>
         </div>

@@ -28,7 +28,7 @@ const LoginForm = ({
                 </div>
                 {errors.password && <div className="row"><p className="error-message">{errors.password}</p></div>}
                 <div className="row right-align">
-                    <input type="submit" className="waves-effect waves-light btn indigo lighten-1" value='Log in'/>
+                    <input type="submit" className="waves-effect waves-light btn blue-grey" value='Log in'/>
                 </div>
                 <div className="row">
                     <p className="right-align"> New to Tap News?  <Link to="/signup">Sign Up</Link></p>

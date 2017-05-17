@@ -5,7 +5,7 @@ import NewsCard from '../NewsCard/NewsCard';
 import NewsFilter from '../NewsFilter/NewsFilter';
 import Auth from '../Auth/Auth';
 
-const categories = [
+const defaultCategories = [
     'Colleges & Schools',
     'Environmental',
     'World',
@@ -33,7 +33,7 @@ class NewsPanel extends React.Component {
             pageNum: 1,
             totalPages: 1,
             loadedAll: false,
-            filterCategories: categories
+            filterCategories: defaultCategories
         };
         this.handleScroll = this.handleScroll.bind(this);
         this.handleFilterCategoriesSelection = this.handleFilterCategoriesSelection.bind(this);
@@ -103,7 +103,7 @@ class NewsPanel extends React.Component {
         return (
                 <div className="row">
                     <NewsFilter
-                        categories={categories}
+                        categories={defaultCategories}
                         filterCategories={this.state.filterCategories}
                         onFilterCategoriesSelection={this.handleFilterCategoriesSelection}
                     />
