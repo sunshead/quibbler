@@ -19,16 +19,14 @@ class NewsFilter extends React.Component {
             </div>
         );
         return (
-            <div className="col s12 m3">
-                <div className="card-panel blue-grey darken-4">
-                    <p className="card-title grey-text">Category</p>
-                    <CheckboxGroup
-                        name="categories"
-                        value={this.props.filterCategories}
-                        onChange={this.handleFilterChange}>
-                        {checkbox}
-                    </CheckboxGroup>
-                </div>
+            <div className="card-panel blue-grey darken-4">
+                <p className="card-title grey-text">Category</p>
+                <CheckboxGroup
+                    name="categories"
+                    value={this.props.filterCategories}
+                    onChange={this.handleFilterChange}>
+                    {checkbox}
+                </CheckboxGroup>
             </div>
         )
     }

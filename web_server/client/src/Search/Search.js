@@ -1,4 +1,5 @@
 import React from 'react';
+import './Search.css';
 
 class Search extends React.Component {
     constructor(props) {
@@ -12,17 +13,14 @@ class Search extends React.Component {
 
     render() {
         return (
-            <nav className="blue-grey lighten-4">
-                <div className="nav-wrapper">
-                    <form>
-                        <div className="input-field">
-                            <input id="search" type="search" value={this.props.searchText} onChange={this.handleSearch}/>
-                            <label className="label-icon" for="search"><i className="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </div>
-            </nav>
+            <div className="blue-grey lighten-4">
+                <form>
+                    <div className="input-field search-bar">
+                        <input className="search-field" id="search" type="search" value={this.props.searchText} onChange={this.handleSearch}/>
+                        <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                    </div>
+                </form>
+            </div>
         )
     }
 }

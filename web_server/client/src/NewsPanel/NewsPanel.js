@@ -99,15 +99,13 @@ class NewsPanel extends React.Component {
     }
 
     renderNews() {
-        console.log(this.state.searchText);
         let categories = this.state.filterCategories;
+        let searchText = this.state.searchText ? this.state.searchText.toLowerCase() : '';
         let news_list = this.state.news.map(function (news) {
-            // if (news.title.indexOf(this.state.searchText) === -1) {
-            //     return;
-            // }
-            //&& (news.title.indexOf(this.state.searchText) !== -
-            console.log(news.title);
-            if (categories.includes(news.class) && (news.title.indexOf(this.state.searchText) != -1)) {
+            if (news.title.toLowerCase().indexOf(searchText) === -1) {
+                return;
+            }
+            if (categories.includes(news.class)) {
                 return (
                     <a href="#">
                         <NewsCard news={news}/>
@@ -118,12 +116,14 @@ class NewsPanel extends React.Component {
 
         return (
                 <div className="row">
-                    <Search searchText={this.state.searchText} onSearchTextInput={this.handleSearchTextInput}/>
-                    <NewsFilter
-                        categories={defaultCategories}
-                        filterCategories={this.state.filterCategories}
-                        onFilterCategoriesSelection={this.handleFilterCategoriesSelection}
-                    />
+                    <div className="col s12 m3">
+                        <Search searchText={this.state.searchText} onSearchTextInput={this.handleSearchTextInput}/>
+                        <NewsFilter
+                            categories={defaultCategories}
+                            filterCategories={this.state.filterCategories}
+                            onFilterCategoriesSelection={this.handleFilterCategoriesSelection}
+                        />
+                    </div>
                     <div className="col s12 m9">
                         {news_list}
                     </div>
