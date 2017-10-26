@@ -12,11 +12,13 @@ const Base = ({ children }) => (
                 <ul id="nav-mobile" className="right">
                     {Auth.isUserAuthenticated() ?
                         (<div>
+                            <li><Link to="/saved">Saved News</Link></li>
                             <li>{Auth.getEmail()}</li>
                             <li><Link to="/logout">Log out</Link></li>
                         </div>)
                         :
                         (<div>
+                            <li><Link to="/saved">Saved News</Link></li>
                             <li><Link to="/login">Log in</Link></li>
                             <li><Link to="/signup">Sign up</Link></li>
                         </div>)
